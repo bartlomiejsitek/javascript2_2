@@ -20,7 +20,6 @@
     loader.innerHTML = '<div class="loading-text">Loading…</div>';
     document.body.appendChild(loader);
   }
-
   function hideLoading() {
     const loader = document.getElementById('loading-overlay');
     if (loader) {
@@ -55,8 +54,6 @@
   });
 
   cw2.addEventListener("click", function() {
-    showLoading();
-
     fetch('https://jsonplaceholder.typicode.com/posts/1', {
       method: 'GET'
     })
@@ -71,7 +68,6 @@
       })
       .catch(error => {
         console.error(error);
-        hideLoading();
         answer.innerHTML = "Błąd podczas pobierania posta.";
       });
   });
