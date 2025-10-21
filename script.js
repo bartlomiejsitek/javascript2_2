@@ -55,7 +55,7 @@
   });
 
   cw2.addEventListener("click", function() {
-    answer.textContent = "Loading…";
+    showLoading();
 
     fetch('https://jsonplaceholder.typicode.com/posts/1', {
       method: 'GET'
@@ -71,6 +71,7 @@
       })
       .catch(error => {
         console.error(error);
+        hideLoading();
         answer.innerHTML = "Błąd podczas pobierania posta.";
       });
   });
