@@ -14,18 +14,27 @@
       })
   })
 
-  cw1.addEventListener("click", function() {
-    answer.textContent = "Loading…";
+  function showLoading() {
+    const loader = document.createElement('div');
+    loader.id = 'loading-overlay';
+    loader.innerHTML = '<div class="loading-text">Loading…</div>';
+    document.body.appendChild(loader);
+  }
 
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'GET'
-    })
+  function hideLoading() {
+    const loader = document.getElementById('loading-overlay');
+    if (loader) {
+      loader.remove();
+    }
+  }
+
+  cw1.addEventListener("click", function() {
+    showLoading();
+
+    fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(posts => {
-        console.log(posts);
-        if (posts.length > 0) {
-          console.log("Tytuł wybranego posta:", posts[0].title);  // Wybrany pierwszy z listy post
-        }
+        hideLoading();
 
         const postElements = posts.map(post => {
           return `
@@ -39,6 +48,7 @@
         answer.innerHTML = postElements.join('');
       })
       .catch(error => {
+        hideLoading();
         console.error(error);
         answer.innerHTML = "Błąd podczas pobierania postów.";
       });
