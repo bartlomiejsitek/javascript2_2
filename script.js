@@ -21,8 +21,11 @@
       method: 'GET'
     })
       .then(response => response.json())
-      .then(data => {
-        const posts = data;
+      .then(posts => {
+        console.log(posts);
+        if (posts.length > 0) {
+          console.log("Tytuł wybranego posta:", posts[0].title);  // Wybrany pierwszy z listy post
+        }
 
         const postElements = posts.map(post => {
           return `
@@ -49,6 +52,10 @@
     })
       .then(response => response.json())
       .then(post => {
+        console.log(post);
+        console.log(post.title);
+        console.log(post.body);
+
         const html = `<h3>${post.title}</h3><p>${post.body}</p>`;
         answer.innerHTML = html;
       })
