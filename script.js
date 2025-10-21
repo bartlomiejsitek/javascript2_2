@@ -24,12 +24,16 @@
       .then(data => {
         const posts = data;
 
-        const listItems = posts.map(post => {
-          return `<li><strong>${post.title}</strong><br>${post.body}</li>`;
+        const postElements = posts.map(post => {
+          return `
+            <div class="post">
+              <h3>${post.title}</h3>
+              <p>${post.body}</p>
+            </div>
+          `;
         });
 
-        const html = `<ul>${listItems.join('')}</ul>`;
-        answer.innerHTML = html;
+        answer.innerHTML = postElements.join('');
       })
       .catch(error => {
         console.error(error);
